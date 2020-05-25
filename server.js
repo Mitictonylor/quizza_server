@@ -4,7 +4,7 @@ const MongoClient = require('mongodb').MongoClient;
 const createRouter = require('./helpers/create_router.js');
 const cors = require('cors');
 const parser = require('body-parser');
-const port = process.env.PORT
+// const port = process.env.PORT
 
 app.use(parser.json());
 app.use(cors());
@@ -14,7 +14,7 @@ app.use(cors());
 
 const uri = "mongodb+srv://admin:Quizza1quizza2quizza3@quizza-aiaib.mongodb.net/test?retryWrites=true&w=majority";
 
-MongoClient.connect(uri)
+MongoClient.connect(uri,{ useUnifiedTopology: true })
 .then((client) => {
   const db = client.db('hall_of_fame');
   const triviaCollection = db.collection('Seek_and_destroy');
@@ -23,6 +23,6 @@ MongoClient.connect(uri)
 })
 .catch(console.error);
 
-app.listen(port, function () {
+app.listen(3000, function () {
   console.log(`Listening on port ${this.address().port}`);
 });
